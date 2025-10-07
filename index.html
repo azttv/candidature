@@ -346,6 +346,200 @@
   </style>
 </head>
 <body>
+<div class="rules-popup" id="rulesPopup">
+  <div class="rules-content">
+    <h2>📋 Règlement du serveur</h2>
+    <div class="rules-scroll" id="rulesScroll">
+      <div class="rule-item">
+        <h3>1. Respect et comportement</h3>
+        <p>Tout manque de respect envers les autres joueurs, le staff ou toute forme de harcèlement est strictement interdit.</p>
+      </div>
+      <div class="rule-item">
+        <h3>2. Triche et exploitation</h3>
+        <p>L'utilisation de mods interdits, hacks, x-ray ou tout autre moyen de triche est prohibé et entraînera un bannissement définitif.</p>
+      </div>
+      <div class="rule-item">
+        <h3>3. Grief et vol</h3>
+        <p>Le grief à grande échelle et le vol sont interdits. Respectez les propriétés des autres joueurs.</p>
+      </div>
+      <div class="rule-item">
+        <h3>4. Communication</h3>
+        <p>Le spam, la publicité pour d'autres serveurs, et tout langage offensant à répétition sont interdits dans le chat.</p>
+      </div>
+      <div class="rule-item">
+        <h3>5. Constructions</h3>
+        <p>Les constructions doivent être réalisées dans le respect de l'environnement du serveur. Pas de structures offensantes.</p>
+      </div>
+    </div>
+    <div class="rules-checkbox">
+      <input type="checkbox" id="acceptRules" disabled>
+      <label for="acceptRules">J'ai lu, et approuvé ces règles.</label>
+    </div>
+    <button class="rules-close-btn" id="closeRulesBtn" disabled>Fermer</button>
+  </div>
+</div>
+<style>
+  .rules-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.rules-content {
+  background: linear-gradient(135deg, #721e1e, #982a2a);
+  border: 3px solid #ff4c4c;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 50px rgba(255, 76, 76, 0.8), 0 0 100px rgba(255, 76, 76, 0.4);
+  animation: popupPulse 2s infinite alternate;
+}
+
+@keyframes popupPulse {
+  0% {
+    box-shadow: 0 0 30px rgba(255, 76, 76, 0.6), 0 0 60px rgba(255, 76, 76, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 50px rgba(255, 76, 76, 1), 0 0 100px rgba(255, 76, 76, 0.6);
+  }
+}
+
+.rules-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 2rem;
+  text-shadow: 0 0 10px rgba(255, 76, 76, 0.8);
+}
+
+.rules-scroll {
+  overflow-y: auto;
+  flex: 1;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+.rules-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rules-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.rules-scroll::-webkit-scrollbar-thumb {
+  background: #ff4c4c;
+  border-radius: 10px;
+}
+
+.rules-scroll::-webkit-scrollbar-thumb:hover {
+  background: #ff6b6b;
+}
+
+.rule-item {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #ff4c4c;
+}
+
+.rule-item h3 {
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.rule-item p {
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.rules-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.rules-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #ff4c4c;
+}
+
+.rules-checkbox input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.rules-checkbox label {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.rules-close-btn {
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: #ff4c4c;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(255, 76, 76, 0.4);
+}
+
+.rules-close-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rules-close-btn:not(:disabled):hover {
+  background: #ff6b6b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 76, 76, 0.6);
+}
+
+@media(max-width: 768px) {
+  .rules-content {
+    padding: 20px;
+    max-height: 85vh;
+  }
+
+  .rules-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .rule-item h3 {
+    font-size: 1rem;
+  }
+
+  .rules-checkbox label {
+    font-size: 1rem;
+  }
+}
+</style>
 <header id="mainHeader">
   <div class="header-bg"></div>
   <div class="header-content">
@@ -446,6 +640,38 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Rules popup functionality
+  const rulesPopup = document.getElementById('rulesPopup');
+  const rulesScroll = document.getElementById('rulesScroll');
+  const acceptRules = document.getElementById('acceptRules');
+  const closeRulesBtn = document.getElementById('closeRulesBtn');
+
+  // Check if user has scrolled to bottom
+  rulesScroll.addEventListener('scroll', () => {
+    const scrolledToBottom = rulesScroll.scrollHeight - rulesScroll.scrollTop <= rulesScroll.clientHeight + 10;
+    if (scrolledToBottom) {
+      acceptRules.disabled = false;
+    }
+  });
+
+  // Enable close button when checkbox is checked
+  acceptRules.addEventListener('change', (e) => {
+    closeRulesBtn.disabled = !e.target.checked;
+  });
+
+  // Close popup
+  closeRulesBtn.addEventListener('click', () => {
+    if (acceptRules.checked) {
+      rulesPopup.style.display = 'none';
+      localStorage.setItem('rulesAccepted', 'true');
+    }
+  });
+
+  // Check if rules were already accepted
+  if (localStorage.getItem('rulesAccepted') === 'true') {
+    rulesPopup.style.display = 'none';
+  }
+
   // Copy IP functionality
   const copyIP = document.getElementById('copyIP');
   const copyBubble = document.getElementById('copyBubble');
@@ -506,7 +732,7 @@
   // Discord OAuth configuration
   const DISCORD_CLIENT_ID = '1425143639125786724';
   const REDIRECT_URI = window.location.origin + window.location.pathname;
-  const DISCORD_OAUTH_URL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
+  const DISCORD_OAUTH_URL = `https://discord.com/oauth2/authorize?client_id=1425143639125786724&response_type=code&redirect_uri=https%3A%2F%2Fcandid.true-vanilla.fr%2F&scope=identify`;
 
   // Discord login button
   document.getElementById('discordBtn').addEventListener('click', () => {
@@ -567,6 +793,13 @@
       return;
     }
 
+    // Check if user already submitted
+    const hasSubmitted = localStorage.getItem(`submitted_${discordUserData.id}`);
+    if (hasSubmitted) {
+      alert('Vous avez déjà soumis une candidature avec ce compte Discord.');
+      return;
+    }
+
     const birthdate = document.getElementById('birthdate').value;
     const application = document.getElementById('application').value;
 
@@ -594,7 +827,7 @@
             inline: false
           },
           {
-            name: "✍️ Candidature",
+            name: "✏️ Candidature",
             value: application.length > 1024 ? application.substring(0, 1021) + "..." : application,
             inline: false
           }
@@ -610,7 +843,6 @@
     };
 
     try {
-      // IMPORTANT: Replace this URL with your actual Discord webhook URL
       const webhookURL = 'https://discord.com/api/webhooks/1425136704796491838/p-801gPLjvGjMQQhOZaAkYEU1L57F_bCC6OeWr8YF8quwB6cea_-IS_EcuX9UDYzsG6C';
       
       const response = await fetch(webhookURL, {
@@ -622,8 +854,17 @@
       });
 
       if (response.ok) {
+        // Mark as submitted
+        localStorage.setItem(`submitted_${discordUserData.id}`, 'true');
+        
         successMessage.classList.add('show');
         form.reset();
+        
+        // Disable form
+        document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
+          el.disabled = true;
+        });
+        
         setTimeout(() => {
           successMessage.classList.remove('show');
         }, 5000);
@@ -637,5 +878,4 @@
   });
 </script>
 </body>
-
 </html>
