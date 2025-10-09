@@ -878,6 +878,493 @@
     }
   });
 </script>
+<button class="support-btn" id="supportBtn" title="Support - Réinitialiser la candidature">
+  <i class="fa-solid fa-triangle-exclamation"></i>
+</button>
+
+<div class="support-overlay" id="supportOverlay"></div>
+
+<div class="support-panel" id="supportPanel">
+  <h2><i class="fa-solid fa-triangle-exclamation"></i> Support</h2>
+  <p>Si vous devez modifier votre candidature, vous pouvez la réinitialisé ici, merci d'ouvrir un ticket avant de généré un code de réinitialisation.</p>
+  
+  <div class="error-message" id="errorMessage">
+    <i class="fas fa-exclamation-triangle"></i> Code incorrect ou expiré
+  </div>
+  
+  <div class="success-badge" id="successBadge">
+    <i class="fas fa-check-circle"></i> Réinitialisation réussie ! Vous pouvez maintenant soumettre à nouveau.
+  </div>
+  
+  <div class="generate-code-section" id="generateSection">
+    <p style="margin-bottom: 20px;">Cliquez sur le bouton ci-dessous pour générer un code. Ce code sera envoyé à l'équipe staff.</p>
+    <button class="generate-code-btn" id="generateCodeBtn">
+      <i class="fas fa-key"></i> Générer un code
+    </button>
+  </div>
+
+  <div class="code-input-section" id="codeInputSection" style="display: none;">
+    <div class="code-sent-info">
+      <i class="fas fa-info-circle"></i> Un code a été envoyé. Contactez le staff pour l'obtenir.
+    </div>
+    
+    <div class="code-input-group">
+      <label for="resetCode">
+        <i class="fas fa-key"></i> Code de réinitialisation
+      </label>
+      <input 
+        type="text" 
+        id="resetCode" 
+        placeholder="XXXX-XXXX"
+        maxlength="9"
+      >
+    </div>
+    
+    <div class="support-buttons">
+      <button class="support-cancel-btn" id="supportCancelBtn">
+        <i class="fas fa-times"></i> Annuler
+      </button>
+      <button class="support-submit-btn" id="supportSubmitBtn">
+        <i class="fas fa-check"></i> Valider
+      </button>
+    </div>
+  </div>
+</div>
+<style>
+.support-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #4facff, #00f2fe);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(79,172,255,0.6);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  border: none;
+  color: white;
+  font-size: 24px;
+}
+
+.support-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 30px rgba(79,172,255,0.8);
+}
+
+.support-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+  border: 3px solid #4facff;
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  z-index: 10001;
+  box-shadow: 0 0 50px rgba(79,172,255,0.8);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.support-panel.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.support-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.support-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.support-panel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px rgba(79,172,255,0.8);
+}
+
+.support-panel p {
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.code-input-group {
+  margin-bottom: 25px;
+}
+
+.code-input-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.code-input-group input {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-family: 'Courier New', monospace;
+  background: rgba(0,0,0,0.3);
+  border: 2px solid rgba(79,172,255,0.5);
+  border-radius: 10px;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.code-input-group input:focus {
+  outline: none;
+  border-color: #4facff;
+  box-shadow: 0 0 20px rgba(79,172,255,0.6);
+}
+
+.support-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.support-submit-btn,
+.support-cancel-btn {
+  flex: 1;
+  padding: 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.support-submit-btn {
+  background: linear-gradient(135deg, #4fffb0, #4facff);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(79,255,176,0.4);
+}
+
+.support-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(79,255,176,0.6);
+}
+
+.support-cancel-btn {
+  background: rgba(255,76,76,0.2);
+  color: #ff4c4c;
+  border: 2px solid #ff4c4c;
+}
+
+.support-cancel-btn:hover {
+  background: rgba(255,76,76,0.3);
+  transform: translateY(-2px);
+}
+
+.error-message {
+  background: rgba(255,76,76,0.2);
+  border: 2px solid #ff4c4c;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
+  color: #ff4c4c;
+  text-align: center;
+  font-weight: 600;
+  display: none;
+}
+
+.error-message.show {
+  display: block;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.success-badge {
+  background: linear-gradient(135deg, #4fffb0, #4facff);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: none;
+}
+
+.success-badge.show {
+  display: block;
+  animation: slideIn 0.5s;
+}
+
+.generate-code-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4facff, #00f2fe);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(79,172,255,0.4);
+}
+
+.generate-code-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(79,172,255,0.8);
+}
+
+.generate-code-btn:active {
+  transform: translateY(-1px);
+}
+
+.code-sent-info {
+  background: rgba(79,172,255,0.2);
+  border: 2px solid #4facff;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #4facff;
+  text-align: center;
+  font-weight: 600;
+  animation: slideIn 0.5s;
+}
+
+@media(max-width: 768px) {
+  .support-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .support-panel {
+    padding: 20px;
+  }
+  
+  .support-panel h2 {
+    font-size: 1.5rem;
+  }
+}
+</style>
+<script>
+// Support panel functionality
+const supportBtn = document.getElementById('supportBtn');
+const supportPanel = document.getElementById('supportPanel');
+const supportOverlay = document.getElementById('supportOverlay');
+const supportCancelBtn = document.getElementById('supportCancelBtn');
+const supportSubmitBtn = document.getElementById('supportSubmitBtn');
+const resetCodeInput = document.getElementById('resetCode');
+const errorMessage = document.getElementById('errorMessage');
+const successBadge = document.getElementById('successBadge');
+const generateCodeBtn = document.getElementById('generateCodeBtn');
+const generateSection = document.getElementById('generateSection');
+const codeInputSection = document.getElementById('codeInputSection');
+
+// Store the current valid code (this will be generated and sent to Discord)
+let currentValidCode = null;
+
+// Generate a random reset code
+function generateResetCode() {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let code = '';
+  for (let i = 0; i < 8; i++) {
+    if (i === 4) code += '-';
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
+// Send code to Discord webhook
+async function sendCodeToDiscord(code, discordUser) {
+  const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
+  
+  const webhookData = {
+    embeds: [{
+      title: "🔑 Code de Réinitialisation Généré",
+      color: 16776960, // Yellow
+      fields: [
+        {
+          name: `\`${code}\``,
+          value: "",
+          inline: false
+        },
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "True Vanilla - Système de Support"
+      }
+    }]
+  };
+
+  try {
+    await fetch(webhookURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(webhookData)
+    });
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du code:', error);
+  }
+}
+
+// Notify Discord when code is used
+async function notifyCodeUsed(code, discordUser) {
+  const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
+  
+  const webhookData = {
+    embeds: [{
+      title: "✅ Code de Réinitialisation Utilisé",
+      color: 5763719, // Green
+      fields: [
+        {
+          name: `\`${code}\``,
+          value: "",
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: "True Vanilla - Système de Support"
+      }
+    }]
+  };
+
+  try {
+    await fetch(webhookURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(webhookData)
+    });
+  } catch (error) {
+    console.error('Erreur lors de la notification:', error);
+  }
+}
+
+// Open support panel
+supportBtn.addEventListener('click', () => {
+  supportPanel.classList.add('active');
+  supportOverlay.classList.add('active');
+  errorMessage.classList.remove('show');
+  successBadge.classList.remove('show');
+  resetCodeInput.value = '';
+  
+  // Reset to generate section
+  generateSection.style.display = 'block';
+  codeInputSection.style.display = 'none';
+  currentValidCode = null;
+});
+
+// Generate code button
+generateCodeBtn.addEventListener('click', () => {
+  // Generate new code
+  currentValidCode = generateResetCode();
+  sendCodeToDiscord(currentValidCode, discordUserData);
+  
+  // Switch to code input section
+  generateSection.style.display = 'none';
+  codeInputSection.style.display = 'block';
+});
+
+// Close support panel
+function closeSupportPanel() {
+  supportPanel.classList.remove('active');
+  supportOverlay.classList.remove('active');
+  resetCodeInput.value = '';
+  errorMessage.classList.remove('show');
+  generateSection.style.display = 'block';
+  codeInputSection.style.display = 'none';
+}
+
+supportCancelBtn.addEventListener('click', closeSupportPanel);
+supportOverlay.addEventListener('click', closeSupportPanel);
+
+// Format code input
+resetCodeInput.addEventListener('input', (e) => {
+  let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (value.length > 4) {
+    value = value.slice(0, 4) + '-' + value.slice(4, 8);
+  }
+  e.target.value = value;
+});
+
+// Validate and reset
+supportSubmitBtn.addEventListener('click', () => {
+  const enteredCode = resetCodeInput.value.trim().toUpperCase();
+  
+  if (enteredCode === currentValidCode) {
+    // Code is correct
+    errorMessage.classList.remove('show');
+    successBadge.classList.add('show');
+    
+    // Reset localStorage
+    if (discordUserData) {
+      localStorage.removeItem(`submitted_${discordUserData.id}`);
+    }
+    
+    // Notify Discord that code was used
+    notifyCodeUsed(currentValidCode, discordUserData);
+    
+    // Generate new code (invalidate the old one)
+    currentValidCode = generateResetCode();
+    
+    // Re-enable form
+    document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
+      el.disabled = false;
+    });
+    
+    // Close panel after 2 seconds
+    setTimeout(() => {
+      closeSupportPanel();
+      successBadge.classList.remove('show');
+      location.reload();
+    }, 2000);
+    
+  } else {
+    // Code is incorrect
+    errorMessage.classList.add('show');
+    resetCodeInput.value = '';
+  }
+});
+
+// Allow Enter key to submit
+resetCodeInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    supportSubmitBtn.click();
+  }
+});
+</script>
 </body>
 </html>
-
