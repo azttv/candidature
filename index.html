@@ -745,13 +745,11 @@
   </div>
 </div>
 <script>
-  // Rules popup functionality
   const rulesPopup = document.getElementById('rulesPopup');
   const rulesScroll = document.getElementById('rulesScroll');
   const acceptRules = document.getElementById('acceptRules');
   const closeRulesBtn = document.getElementById('closeRulesBtn');
 
-  // Check if user has scrolled to bottom
   rulesScroll.addEventListener('scroll', () => {
     const scrolledToBottom = rulesScroll.scrollHeight - rulesScroll.scrollTop <= rulesScroll.clientHeight + 10;
     if (scrolledToBottom) {
@@ -759,12 +757,10 @@
     }
   });
 
-  // Enable close button when checkbox is checked
   acceptRules.addEventListener('change', (e) => {
     closeRulesBtn.disabled = !e.target.checked;
   });
 
-  // Close popup
   closeRulesBtn.addEventListener('click', () => {
     if (acceptRules.checked) {
       rulesPopup.style.display = 'none';
@@ -772,12 +768,10 @@
     }
   });
 
-  // Check if rules were already accepted
   if (sessionStorage.getItem('rulesAccepted') === 'true') {
     rulesPopup.style.display = 'none';
   }
 
-  // Date format validation
   const birthdateInput = document.getElementById('birthdate');
   birthdateInput.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -790,29 +784,24 @@
     e.target.value = value;
   });
 
-  // Form submission
   const form = document.getElementById('applicationForm');
   const successMessage = document.getElementById('successMessage');
   
   let discordUserData = null;
 
-  // Discord OAuth configuration
   const DISCORD_CLIENT_ID = '1425143639125786724';
   const REDIRECT_URI = window.location.origin + window.location.pathname;
   const DISCORD_OAUTH_URL = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify`;
 
-  // Discord login button
   document.getElementById('discordBtn').addEventListener('click', () => {
     window.location.href = DISCORD_OAUTH_URL;
   });
 
-  // Check for OAuth token in URL
   function checkDiscordAuth() {
     const fragment = new URLSearchParams(window.location.hash.slice(1));
     const accessToken = fragment.get('access_token');
 
     if (accessToken) {
-      // Fetch user data from Discord
       fetch('https://discord.com/api/users/@me', {
         headers: {
           authorization: `Bearer ${accessToken}`
@@ -828,7 +817,6 @@
           tag: user.discriminator === '0' ? user.username : `${user.username}#${user.discriminator}`
         };
 
-        // Display user info
         document.getElementById('discordBtn').style.display = 'none';
         const userDisplay = document.getElementById('discordUser');
         userDisplay.style.display = 'flex';
@@ -840,7 +828,6 @@
         document.getElementById('discordAvatar').src = avatarUrl;
         document.getElementById('discordUsername').textContent = discordUserData.tag;
 
-        // Clean URL
         window.history.replaceState({}, document.title, window.location.pathname);
       })
       .catch(error => {
@@ -860,7 +847,6 @@
       return;
     }
 
-    // Check if user already submitted
     const hasSubmitted = sessionStorage.getItem(`submitted_${discordUserData.id}`);
     if (hasSubmitted) {
       alert('Vous avez déjà soumis une candidature avec ce compte Discord.');
@@ -870,14 +856,12 @@
     const birthdate = document.getElementById('birthdate').value;
     const application = document.getElementById('application').value;
 
-    // Validate date format
     const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
     if (!dateRegex.test(birthdate)) {
       alert('Format de date invalide. Utilisez JJ/MM/AAAA');
       return;
     }
 
-    // Prepare webhook data
     const webhookData = {
       embeds: [{
         title: "📝 Nouvelle Candidature",
@@ -921,13 +905,11 @@
       });
 
       if (response.ok) {
-        // Mark as submitted
         sessionStorage.setItem(`submitted_${discordUserData.id}`, 'true');
         
         successMessage.classList.add('show');
         form.reset();
         
-        // Disable form
         document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
           el.disabled = true;
         });
@@ -944,7 +926,6 @@
     }
   });
 
-  // Support panel functionality
   const supportBtn = document.getElementById('supportBtn');
   const supportPanel = document.getElementById('supportPanel');
   const supportOverlay = document.getElementById('supportOverlay');
@@ -957,10 +938,8 @@
   const generateSection = document.getElementById('generateSection');
   const codeInputSection = document.getElementById('codeInputSection');
 
-  // Store the current valid code (this will be generated and sent to Discord)
   let currentValidCode = null;
 
-  // Generate a random reset code
   function generateResetCode() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let code = '';
@@ -971,14 +950,13 @@
     return code;
   }
 
-  // Send code to Discord webhook
   async function sendCodeToDiscord(code, discordUser) {
     const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
     
     const webhookData = {
       embeds: [{
         title: "🔑 Code de Réinitialisation Généré",
-        color: 16776960, // Yellow
+        color: 16776960,
         fields: [
           {
             name: `\`${code}\``,
@@ -1006,14 +984,13 @@
     }
   }
 
-  // Notify Discord when code is used
   async function notifyCodeUsed(code, discordUser) {
     const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
     
     const webhookData = {
       embeds: [{
         title: "✅ Code de Réinitialisation Utilisé",
-        color: 5763719, // Green
+        color: 5763719,
         fields: [
           {
             name: `\`${code}\``,
@@ -1041,32 +1018,24 @@
     }
   }
 
-  // Open support panel
   supportBtn.addEventListener('click', () => {
     supportPanel.classList.add('active');
     supportOverlay.classList.add('active');
     errorMessage.classList.remove('show');
     successBadge.classList.remove('show');
     resetCodeInput.value = '';
-    
-    // Reset to generate section
     generateSection.style.display = 'block';
     codeInputSection.style.display = 'none';
     currentValidCode = null;
   });
 
-  // Generate code button
   generateCodeBtn.addEventListener('click', () => {
-    // Generate new code
     currentValidCode = generateResetCode();
     sendCodeToDiscord(currentValidCode, discordUserData);
-    
-    // Switch to code input section
     generateSection.style.display = 'none';
     codeInputSection.style.display = 'block';
   });
 
-  // Close support panel
   function closeSupportPanel() {
     supportPanel.classList.remove('active');
     supportOverlay.classList.remove('active');
@@ -1078,8 +1047,6 @@
 
   supportCancelBtn.addEventListener('click', closeSupportPanel);
   supportOverlay.addEventListener('click', closeSupportPanel);
-
-  // Format code input
   resetCodeInput.addEventListener('input', (e) => {
     let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
     if (value.length > 4) {
@@ -1088,32 +1055,25 @@
     e.target.value = value;
   });
 
-  // Validate and reset
   supportSubmitBtn.addEventListener('click', () => {
     const enteredCode = resetCodeInput.value.trim().toUpperCase();
     
     if (enteredCode === currentValidCode) {
-      // Code is correct
       errorMessage.classList.remove('show');
       successBadge.classList.add('show');
       
-      // Reset sessionStorage
       if (discordUserData) {
         sessionStorage.removeItem(`submitted_${discordUserData.id}`);
       }
       
-      // Notify Discord that code was used
       notifyCodeUsed(currentValidCode, discordUserData);
       
-      // Generate new code (invalidate the old one)
       currentValidCode = generateResetCode();
-      
-      // Re-enable form
+
       document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
         el.disabled = false;
       });
-      
-      // Close panel after 2 seconds
+
       setTimeout(() => {
         closeSupportPanel();
         successBadge.classList.remove('show');
@@ -1121,13 +1081,11 @@
       }, 2000);
       
     } else {
-      // Code is incorrect
       errorMessage.classList.add('show');
       resetCodeInput.value = '';
     }
   });
 
-  // Allow Enter key to submit
   resetCodeInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       supportSubmitBtn.click();
@@ -1136,3 +1094,4 @@
 </script>
 </body>
 </html>
+
