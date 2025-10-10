@@ -19,7 +19,7 @@
       font-family:Inter,system-ui,sans-serif;
       min-height:100vh;
       color:var(--text);
-      padding-top:140px;
+      padding-top:40px;
       overflow-x:hidden;
       background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
       background-size: 400% 400%;
@@ -31,145 +31,6 @@
       100%{ background-position:0% 50%; }
     }
 
-    header{position:fixed;top:0;width:100%;z-index:200;display:flex;justify-content:center;align-items:center}
-    header .header-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(10px);z-index:-1;opacity:1;transition:.4s}
-    header.scrolled .header-bg{opacity:1}
-    .header-content{width:100%;max-width:1400px;display:flex;align-items:center;justify-content:center;padding:15px 40px;gap:20px;position:relative;text-shadow:0 2px 8px rgba(0,0,0,.9)}
-    .logo {height: 100px; position: relative; cursor: pointer; overflow: hidden;}
-    .logo::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,.6), transparent);
-      transform: skewX(-25deg);
-    }
-    .logo:hover::after {
-      animation: shine 1s forwards;
-    }
-    @keyframes shine {
-      100% { left: 125%; }
-    }
-    .logo-subtitle{font:400 14px Inter;margin-top:8px;opacity:0;transform:translateY(15px);animation:fadeDown 1s ease forwards .2s;text-shadow:0 2px 8px rgba(0,0,0,.9)}
-    @keyframes fadeDown{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:translateY(0)}}
-    .nav-left,.nav-right{display:flex;gap:12px;align-items:center}
-    .nav-left a,.nav-right a{text-decoration:none;font-weight:500;color:var(--text);padding:8px 14px;border-radius:12px;position:relative;box-shadow:0 5px 15px rgba(79,172,255,.4);transition:.3s;cursor:pointer}
-    header.scrolled .nav-left a, header.scrolled .nav-right a{box-shadow:0 0 5px rgba(0,0,0,.3)}
-    .nav-left a::before,.nav-right a::before{content:'';position:absolute;inset:0;border-radius:12px;box-shadow:0 0 5px #4facff,0 0 10px #00f2fe;opacity:0;transition:.3s}
-    .nav-left a:hover::before,.nav-right a:hover::before{opacity:1}
-    .nav-left a.active{background:var(--active);color:#fff;box-shadow:0 0 15px var(--active),0 0 30px rgba(79,172,255,.5)}
-    .server-ip{position:absolute;right:20px;font-weight:600;padding:10px 16px;border-radius:16px;box-shadow:0 0 10px #4facff;cursor:pointer;transition:.3s,transform .3s;font-size:18px}
-    .server-ip:hover{transform:scale(1.15);text-shadow:0 0 20px #4facff}
-    .copy-bubble{position:absolute;top:-30px;right:0;background:#4facff;color:#fff;font-size:12px;padding:4px 10px;border-radius:8px;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s}
-    .copy-bubble.show{opacity:1;transform:translateY(0)}
-    .chapter{position:absolute;left:5px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:700;text-align:center}
-    .chapter-number{color:#fff;font-size:34px;position:relative;text-shadow:0 0 5px #4facff,0 0 10px #00f2fe;animation:glow 2s infinite alternate}
-    @keyframes glow{0%{text-shadow:0 0 5px #4facff,0 0 10px #00f2fe}50%{text-shadow:0 0 15px #4facff,0 0 30px #00f2fe}100%{text-shadow:0 0 5px #4facff,0 0 10px #00f2fe}}
-    .chapter-season{color:#fff;font-size:30px;position:relative}
-    .chapter-number::before,.chapter-number::after,.chapter-season::before,.chapter-season::after{content:"";position:absolute;font-size:18px;color:#fff;filter:blur(1.5px);opacity:1;white-space:nowrap}
-    .chapter-season::before{content:"Saison 2";right:148%;top:53%;transform:translateY(-50%)}
-    .chapter-season::after{content:"Saison 4";left:148%;top:53%;transform:translateY(-50%)}
-    footer{text-align:center;color:#eef2ffcc;padding:40px 0;font-size:14px;background:#0008}
-
-    .burger {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 28px;
-      color: var(--text);
-      cursor: pointer;
-      position: absolute;
-      left: 20px;
-      z-index: 1001;
-    }
-
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 70%;
-      height: 100vh;
-      background: rgba(0,0,0,0.95);
-      display: flex;
-      flex-direction: column;
-      padding-top: 80px;
-      gap: 20px;
-      transition: transform 0.3s ease;
-      z-index: 1001;
-      transform: translateX(-100%);
-    }
-
-    .mobile-menu.active {
-      transform: translateX(0);
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 99;
-    }
-    .overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mobile-menu a {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--text);
-      padding: 14px 20px;
-      margin: 0 20px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      transition: all 0.3s ease;
-      box-shadow: 0 0 8px rgba(0,0,0,0.4);
-    }
-
-    .mobile-menu a:hover {
-      background: rgba(79,172,255,0.15);
-      box-shadow: 0 0 12px rgba(79,172,255,0.4);
-      transform: translateX(5px);
-    }
-
-    .mobile-menu a.active {
-      background: linear-gradient(90deg, #4facff, #00f2fe);
-      color: #fff;
-      box-shadow: 0 0 15px rgba(79,172,255,0.8), 0 0 25px rgba(0,242,254,0.6);
-    }
-
-    .header-btn.ban-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 48px;
-      height: 48px;
-      margin-left: 15px;
-      border-radius: 50%;
-      border: 2px solid #ff2b2b;
-      color: #ff2b2b;
-      background: transparent;
-      font-size: 18px;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      box-shadow:0 0 10px #ff0000
-    }
-
-    .header-btn.ban-btn:hover {
-      background: #ff2b2b;
-      color: #fff;
-      box-shadow: 0 0 12px rgba(255, 43, 43, 0.8);
-      transform:scale(1.25);
-      text-shadow:0 0 20px #ff0000;
-    }
-
-    /* Form Styles */
     main {
       max-width: 800px;
       margin: 0 auto;
@@ -329,19 +190,415 @@
     }
 
     @media(max-width: 768px) {
-      .logo-subtitle {display: none !important;}
-      .logo-container {display: flex; justify-content: center; width: 100%;}
-      .nav-left, .nav-right, .server-ip, .chapter {display: none !important;}
-      .burger {display: block;}
-      .logo {height: 60px;}
-      .header-content {justify-content: center;padding: 10px 20px;}
-      
       h1 {
         font-size: 1.8rem;
       }
       
       .form-card {
         padding: 20px;
+      }
+    }
+
+    .rules-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(5px);
+    }
+
+    .rules-content {
+      background: linear-gradient(135deg, #721e1e, #982a2a);
+      border: 3px solid #ff4c4c;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 50px rgba(255, 76, 76, 0.8), 0 0 100px rgba(255, 76, 76, 0.4);
+      animation: popupPulse 2s infinite alternate;
+    }
+
+    @keyframes popupPulse {
+      0% {
+        box-shadow: 0 0 30px rgba(255, 76, 76, 0.6), 0 0 60px rgba(255, 76, 76, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 50px rgba(255, 76, 76, 1), 0 0 100px rgba(255, 76, 76, 0.6);
+      }
+    }
+
+    .rules-content h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-size: 2rem;
+      text-shadow: 0 0 10px rgba(255, 76, 76, 0.8);
+    }
+
+    .rules-scroll {
+      overflow-y: auto;
+      flex: 1;
+      margin-bottom: 20px;
+      padding-right: 10px;
+    }
+
+    .rules-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .rules-scroll::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+
+    .rules-scroll::-webkit-scrollbar-thumb {
+      background: #ff4c4c;
+      border-radius: 10px;
+    }
+
+    .rules-scroll::-webkit-scrollbar-thumb:hover {
+      background: #ff6b6b;
+    }
+
+    .rule-item {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border-left: 4px solid #ff4c4c;
+    }
+
+    .rule-item h3 {
+      color: #ffffff;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .rule-item p {
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .rules-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+
+    .rules-checkbox input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: #ff4c4c;
+    }
+
+    .rules-checkbox input[type="checkbox"]:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .rules-checkbox label {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .rules-close-btn {
+      padding: 14px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: #ff4c4c;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 76, 76, 0.4);
+    }
+
+    .rules-close-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .rules-close-btn:not(:disabled):hover {
+      background: #ff6b6b;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 76, 76, 0.6);
+    }
+
+    .support-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4facff, #00f2fe);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(79,172,255,0.6);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border: none;
+      color: white;
+      font-size: 24px;
+    }
+
+    .support-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(79,172,255,0.8);
+    }
+
+    .support-panel {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
+      border: 3px solid #4facff;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 500px;
+      width: 90%;
+      z-index: 10001;
+      box-shadow: 0 0 50px rgba(79,172,255,0.8);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .support-panel.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .support-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 10000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .support-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .support-panel h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px rgba(79,172,255,0.8);
+    }
+
+    .support-panel p {
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .code-input-group {
+      margin-bottom: 25px;
+    }
+
+    .code-input-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    .code-input-group input {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.2rem;
+      font-family: 'Courier New', monospace;
+      background: rgba(0,0,0,0.3);
+      border: 2px solid rgba(79,172,255,0.5);
+      border-radius: 10px;
+      color: var(--text);
+      text-align: center;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    .code-input-group input:focus {
+      outline: none;
+      border-color: #4facff;
+      box-shadow: 0 0 20px rgba(79,172,255,0.6);
+    }
+
+    .support-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .support-submit-btn,
+    .support-cancel-btn {
+      flex: 1;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .support-submit-btn {
+      background: linear-gradient(135deg, #4fffb0, #4facff);
+      color: #fff;
+      box-shadow: 0 5px 15px rgba(79,255,176,0.4);
+    }
+
+    .support-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(79,255,176,0.6);
+    }
+
+    .support-cancel-btn {
+      background: rgba(255,76,76,0.2);
+      color: #ff4c4c;
+      border: 2px solid #ff4c4c;
+    }
+
+    .support-cancel-btn:hover {
+      background: rgba(255,76,76,0.3);
+      transform: translateY(-2px);
+    }
+
+    .error-message {
+      background: rgba(255,76,76,0.2);
+      border: 2px solid #ff4c4c;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 15px;
+      color: #ff4c4c;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    .success-badge {
+      background: linear-gradient(135deg, #4fffb0, #4facff);
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: none;
+    }
+
+    .success-badge.show {
+      display: block;
+      animation: slideIn 0.5s;
+    }
+
+    .generate-code-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #4facff, #00f2fe);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(79,172,255,0.4);
+    }
+
+    .generate-code-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(79,172,255,0.8);
+    }
+
+    .generate-code-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .code-sent-info {
+      background: rgba(79,172,255,0.2);
+      border: 2px solid #4facff;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 20px;
+      color: #4facff;
+      text-align: center;
+      font-weight: 600;
+      animation: slideIn 0.5s;
+    }
+
+    @media(max-width: 768px) {
+      .support-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        bottom: 20px;
+        right: 20px;
+      }
+      
+      .support-panel {
+        padding: 20px;
+      }
+      
+      .support-panel h2 {
+        font-size: 1.5rem;
+      }
+
+      .rules-content {
+        padding: 20px;
+        max-height: 85vh;
+      }
+
+      .rules-content h2 {
+        font-size: 1.5rem;
+      }
+
+      .rule-item h3 {
+        font-size: 1rem;
+      }
+
+      .rules-checkbox label {
+        font-size: 1rem;
       }
     }
   </style>
@@ -379,207 +636,6 @@
     <button class="rules-close-btn" id="closeRulesBtn" disabled>Fermer</button>
   </div>
 </div>
-<style>
-  .rules-popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10000;
-  backdrop-filter: blur(5px);
-}
-
-.rules-content {
-  background: linear-gradient(135deg, #721e1e, #982a2a);
-  border: 3px solid #ff4c4c;
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 50px rgba(255, 76, 76, 0.8), 0 0 100px rgba(255, 76, 76, 0.4);
-  animation: popupPulse 2s infinite alternate;
-}
-
-@keyframes popupPulse {
-  0% {
-    box-shadow: 0 0 30px rgba(255, 76, 76, 0.6), 0 0 60px rgba(255, 76, 76, 0.3);
-  }
-  100% {
-    box-shadow: 0 0 50px rgba(255, 76, 76, 1), 0 0 100px rgba(255, 76, 76, 0.6);
-  }
-}
-
-.rules-content h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #ffffff;
-  font-size: 2rem;
-  text-shadow: 0 0 10px rgba(255, 76, 76, 0.8);
-}
-
-.rules-scroll {
-  overflow-y: auto;
-  flex: 1;
-  margin-bottom: 20px;
-  padding-right: 10px;
-}
-
-.rules-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.rules-scroll::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-
-.rules-scroll::-webkit-scrollbar-thumb {
-  background: #ff4c4c;
-  border-radius: 10px;
-}
-
-.rules-scroll::-webkit-scrollbar-thumb:hover {
-  background: #ff6b6b;
-}
-
-.rule-item {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  border-left: 4px solid #ff4c4c;
-}
-
-.rule-item h3 {
-  color: #ffffff;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
-}
-
-.rule-item p {
-  color: var(--text);
-  line-height: 1.6;
-}
-
-.rules-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-}
-
-.rules-checkbox input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #ff4c4c;
-}
-
-.rules-checkbox input[type="checkbox"]:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.rules-checkbox label {
-  color: var(--text);
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-}
-
-.rules-close-btn {
-  padding: 14px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: #ff4c4c;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(255, 76, 76, 0.4);
-}
-
-.rules-close-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.rules-close-btn:not(:disabled):hover {
-  background: #ff6b6b;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 76, 76, 0.6);
-}
-
-@media(max-width: 768px) {
-  .rules-content {
-    padding: 20px;
-    max-height: 85vh;
-  }
-
-  .rules-content h2 {
-    font-size: 1.5rem;
-  }
-
-  .rule-item h3 {
-    font-size: 1rem;
-  }
-
-  .rules-checkbox label {
-    font-size: 1rem;
-  }
-}
-</style>
-<header id="mainHeader">
-  <div class="header-bg"></div>
-  <div class="header-content">
-    <button class="burger" id="burgerBtn"><i class="fas fa-bars"></i></button>
-    <div class="chapter">
-      <div class="chapter-number">Chapitre 1</div>
-      <div class="chapter-season">Saison 3</div>
-    </div>
-    <div class="nav-left">
-      <a href="index.html">Accueil</a>
-      <a href="rejoindre.html">Rejoindre</a>
-    </div>
-    <div class="logo-container">
-      <a href="#top"><img src="https://i.imgur.com/45JHB0E.png" alt="True Vanilla" class="logo"></a>
-      <div class="logo-subtitle">   Le premier SMP 90% Vanilla !</div>
-    </div>
-    
-    <nav class="mobile-menu" id="mobileMenu">
-      <a href="index.html">Accueil</a>
-      <a href="rejoindre.html">Rejoindre</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="infos.html">Infos</a>
-      <a href="murdelahonte.html">Mur de la honte</a>
-      <p align="center"> </p>
-      <p align="center">Le premier SMP 90% Vanilla !</p>
-    </nav>
-    <div class="nav-right">
-      <a href="boutique.html">Boutique</a>
-      <a href="infos.html">Infos</a>
-    </div>
-    <div class="server-ip" id="copyIP">play.true-vanilla.fr
-      <span class="copy-bubble" id="copyBubble">Copié !</span>
-    </div>
-  </div>
-  <a href="murdelahonte.html" class="header-btn ban-btn" title="Mur de la honte">
-    <i class="fa-solid fa-ban"></i>
-  </a>
-</header>
-<div class="overlay" id="overlay"></div>
 
 <main>
   <h1>Formulaire de Candidature</h1>
@@ -636,11 +692,59 @@
   </div>
 </main>
 
-<footer>© <span id="year"></span> True Vanilla – Tous droits réservés.</footer>
+<button class="support-btn" id="supportBtn" title="Support - Réinitialiser la candidature">
+  <i class="fa-solid fa-triangle-exclamation"></i>
+</button>
 
+<div class="support-overlay" id="supportOverlay"></div>
+
+<div class="support-panel" id="supportPanel">
+  <h2><i class="fa-solid fa-triangle-exclamation"></i> Support</h2>
+  <p>Si vous devez modifier votre candidature, vous pouvez la réinitialisé ici, merci d'ouvrir un ticket avant de généré un code de réinitialisation.</p>
+  
+  <div class="error-message" id="errorMessage">
+    <i class="fas fa-exclamation-triangle"></i> Code incorrect ou expiré
+  </div>
+  
+  <div class="success-badge" id="successBadge">
+    <i class="fas fa-check-circle"></i> Réinitialisation réussie ! Vous pouvez maintenant soumettre à nouveau.
+  </div>
+  
+  <div class="generate-code-section" id="generateSection">
+    <p style="margin-bottom: 20px;">Cliquez sur le bouton ci-dessous pour générer un code. Ce code sera envoyé à l'équipe staff.</p>
+    <button class="generate-code-btn" id="generateCodeBtn">
+      <i class="fas fa-key"></i> Générer un code
+    </button>
+  </div>
+
+  <div class="code-input-section" id="codeInputSection" style="display: none;">
+    <div class="code-sent-info">
+      <i class="fas fa-info-circle"></i> Un code a été envoyé. Contactez le staff pour l'obtenir.
+    </div>
+    
+    <div class="code-input-group">
+      <label for="resetCode">
+        <i class="fas fa-key"></i> Code de réinitialisation
+      </label>
+      <input 
+        type="text" 
+        id="resetCode" 
+        placeholder="XXXX-XXXX"
+        maxlength="9"
+      >
+    </div>
+    
+    <div class="support-buttons">
+      <button class="support-cancel-btn" id="supportCancelBtn">
+        <i class="fas fa-times"></i> Annuler
+      </button>
+      <button class="support-submit-btn" id="supportSubmitBtn">
+        <i class="fas fa-check"></i> Valider
+      </button>
+    </div>
+  </div>
+</div>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
   // Rules popup functionality
   const rulesPopup = document.getElementById('rulesPopup');
   const rulesScroll = document.getElementById('rulesScroll');
@@ -664,52 +768,14 @@
   closeRulesBtn.addEventListener('click', () => {
     if (acceptRules.checked) {
       rulesPopup.style.display = 'none';
-      localStorage.setItem('rulesAccepted', 'true');
+      sessionStorage.setItem('rulesAccepted', 'true');
     }
   });
 
   // Check if rules were already accepted
-  if (localStorage.getItem('rulesAccepted') === 'true') {
+  if (sessionStorage.getItem('rulesAccepted') === 'true') {
     rulesPopup.style.display = 'none';
   }
-
-  // Copy IP functionality
-  const copyIP = document.getElementById('copyIP');
-  const copyBubble = document.getElementById('copyBubble');
-  copyIP.addEventListener('click', () => {
-    navigator.clipboard.writeText('play.true-vanilla.fr');
-    copyBubble.classList.add('show');
-    setTimeout(() => { copyBubble.classList.remove('show'); }, 1300);
-  });
-
-  // Header scroll effect
-  window.addEventListener("scroll", () => {
-    document.getElementById("mainHeader").classList.toggle("scrolled", window.scrollY > 50);
-  });
-
-  // Mobile menu
-  document.addEventListener("DOMContentLoaded", () => {
-    const burgerBtn = document.getElementById("burgerBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const overlay = document.getElementById("overlay");
-
-    function toggleMenu() {
-      overlay.classList.toggle("active");
-      mobileMenu.classList.toggle("active");
-    }
-
-    if (burgerBtn && mobileMenu && overlay) {
-      overlay.addEventListener("click", toggleMenu);
-      burgerBtn.addEventListener("click", toggleMenu);
-
-      document.querySelectorAll(".mobile-menu a").forEach(link => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.remove("active");
-          overlay.classList.remove("active");
-        });
-      });
-    }
-  });
 
   // Date format validation
   const birthdateInput = document.getElementById('birthdate');
@@ -795,7 +861,7 @@
     }
 
     // Check if user already submitted
-    const hasSubmitted = localStorage.getItem(`submitted_${discordUserData.id}`);
+    const hasSubmitted = sessionStorage.getItem(`submitted_${discordUserData.id}`);
     if (hasSubmitted) {
       alert('Vous avez déjà soumis une candidature avec ce compte Discord.');
       return;
@@ -856,7 +922,7 @@
 
       if (response.ok) {
         // Mark as submitted
-        localStorage.setItem(`submitted_${discordUserData.id}`, 'true');
+        sessionStorage.setItem(`submitted_${discordUserData.id}`, 'true');
         
         successMessage.classList.add('show');
         form.reset();
@@ -877,494 +943,196 @@
       alert('Erreur de connexion. Veuillez réessayer.');
     }
   });
-</script>
-<button class="support-btn" id="supportBtn" title="Support - Réinitialiser la candidature">
-  <i class="fa-solid fa-triangle-exclamation"></i>
-</button>
 
-<div class="support-overlay" id="supportOverlay"></div>
+  // Support panel functionality
+  const supportBtn = document.getElementById('supportBtn');
+  const supportPanel = document.getElementById('supportPanel');
+  const supportOverlay = document.getElementById('supportOverlay');
+  const supportCancelBtn = document.getElementById('supportCancelBtn');
+  const supportSubmitBtn = document.getElementById('supportSubmitBtn');
+  const resetCodeInput = document.getElementById('resetCode');
+  const errorMessage = document.getElementById('errorMessage');
+  const successBadge = document.getElementById('successBadge');
+  const generateCodeBtn = document.getElementById('generateCodeBtn');
+  const generateSection = document.getElementById('generateSection');
+  const codeInputSection = document.getElementById('codeInputSection');
 
-<div class="support-panel" id="supportPanel">
-  <h2><i class="fa-solid fa-triangle-exclamation"></i> Support</h2>
-  <p>Si vous devez modifier votre candidature, vous pouvez la réinitialisé ici, merci d'ouvrir un ticket avant de généré un code de réinitialisation.</p>
-  
-  <div class="error-message" id="errorMessage">
-    <i class="fas fa-exclamation-triangle"></i> Code incorrect ou expiré
-  </div>
-  
-  <div class="success-badge" id="successBadge">
-    <i class="fas fa-check-circle"></i> Réinitialisation réussie ! Vous pouvez maintenant soumettre à nouveau.
-  </div>
-  
-  <div class="generate-code-section" id="generateSection">
-    <p style="margin-bottom: 20px;">Cliquez sur le bouton ci-dessous pour générer un code. Ce code sera envoyé à l'équipe staff.</p>
-    <button class="generate-code-btn" id="generateCodeBtn">
-      <i class="fas fa-key"></i> Générer un code
-    </button>
-  </div>
+  // Store the current valid code (this will be generated and sent to Discord)
+  let currentValidCode = null;
 
-  <div class="code-input-section" id="codeInputSection" style="display: none;">
-    <div class="code-sent-info">
-      <i class="fas fa-info-circle"></i> Un code a été envoyé. Contactez le staff pour l'obtenir.
-    </div>
-    
-    <div class="code-input-group">
-      <label for="resetCode">
-        <i class="fas fa-key"></i> Code de réinitialisation
-      </label>
-      <input 
-        type="text" 
-        id="resetCode" 
-        placeholder="XXXX-XXXX"
-        maxlength="9"
-      >
-    </div>
-    
-    <div class="support-buttons">
-      <button class="support-cancel-btn" id="supportCancelBtn">
-        <i class="fas fa-times"></i> Annuler
-      </button>
-      <button class="support-submit-btn" id="supportSubmitBtn">
-        <i class="fas fa-check"></i> Valider
-      </button>
-    </div>
-  </div>
-</div>
-<style>
-.support-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #4facff, #00f2fe);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(79,172,255,0.6);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  border: none;
-  color: white;
-  font-size: 24px;
-}
-
-.support-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 30px rgba(79,172,255,0.8);
-}
-
-.support-panel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(42, 82, 152, 0.95));
-  border: 3px solid #4facff;
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 500px;
-  width: 90%;
-  z-index: 10001;
-  box-shadow: 0 0 50px rgba(79,172,255,0.8);
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.support-panel.active {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
-}
-
-.support-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  z-index: 10000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(5px);
-}
-
-.support-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.support-panel h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
-  font-size: 1.8rem;
-  text-shadow: 0 0 10px rgba(79,172,255,0.8);
-}
-
-.support-panel p {
-  text-align: center;
-  margin-bottom: 25px;
-  color: var(--text);
-  line-height: 1.6;
-}
-
-.code-input-group {
-  margin-bottom: 25px;
-}
-
-.code-input-group label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-.code-input-group input {
-  width: 100%;
-  padding: 14px;
-  font-size: 1.2rem;
-  font-family: 'Courier New', monospace;
-  background: rgba(0,0,0,0.3);
-  border: 2px solid rgba(79,172,255,0.5);
-  border-radius: 10px;
-  color: var(--text);
-  text-align: center;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-.code-input-group input:focus {
-  outline: none;
-  border-color: #4facff;
-  box-shadow: 0 0 20px rgba(79,172,255,0.6);
-}
-
-.support-buttons {
-  display: flex;
-  gap: 15px;
-}
-
-.support-submit-btn,
-.support-cancel-btn {
-  flex: 1;
-  padding: 14px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.support-submit-btn {
-  background: linear-gradient(135deg, #4fffb0, #4facff);
-  color: #fff;
-  box-shadow: 0 5px 15px rgba(79,255,176,0.4);
-}
-
-.support-submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(79,255,176,0.6);
-}
-
-.support-cancel-btn {
-  background: rgba(255,76,76,0.2);
-  color: #ff4c4c;
-  border: 2px solid #ff4c4c;
-}
-
-.support-cancel-btn:hover {
-  background: rgba(255,76,76,0.3);
-  transform: translateY(-2px);
-}
-
-.error-message {
-  background: rgba(255,76,76,0.2);
-  border: 2px solid #ff4c4c;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 15px;
-  color: #ff4c4c;
-  text-align: center;
-  font-weight: 600;
-  display: none;
-}
-
-.error-message.show {
-  display: block;
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
-}
-
-.success-badge {
-  background: linear-gradient(135deg, #4fffb0, #4facff);
-  border-radius: 10px;
-  padding: 15px;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 15px;
-  display: none;
-}
-
-.success-badge.show {
-  display: block;
-  animation: slideIn 0.5s;
-}
-
-.generate-code-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #4facff, #00f2fe);
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 20px rgba(79,172,255,0.4);
-}
-
-.generate-code-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(79,172,255,0.8);
-}
-
-.generate-code-btn:active {
-  transform: translateY(-1px);
-}
-
-.code-sent-info {
-  background: rgba(79,172,255,0.2);
-  border: 2px solid #4facff;
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 20px;
-  color: #4facff;
-  text-align: center;
-  font-weight: 600;
-  animation: slideIn 0.5s;
-}
-
-@media(max-width: 768px) {
-  .support-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    bottom: 20px;
-    right: 20px;
-  }
-  
-  .support-panel {
-    padding: 20px;
-  }
-  
-  .support-panel h2 {
-    font-size: 1.5rem;
-  }
-}
-</style>
-<script>
-// Support panel functionality
-const supportBtn = document.getElementById('supportBtn');
-const supportPanel = document.getElementById('supportPanel');
-const supportOverlay = document.getElementById('supportOverlay');
-const supportCancelBtn = document.getElementById('supportCancelBtn');
-const supportSubmitBtn = document.getElementById('supportSubmitBtn');
-const resetCodeInput = document.getElementById('resetCode');
-const errorMessage = document.getElementById('errorMessage');
-const successBadge = document.getElementById('successBadge');
-const generateCodeBtn = document.getElementById('generateCodeBtn');
-const generateSection = document.getElementById('generateSection');
-const codeInputSection = document.getElementById('codeInputSection');
-
-// Store the current valid code (this will be generated and sent to Discord)
-let currentValidCode = null;
-
-// Generate a random reset code
-function generateResetCode() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let code = '';
-  for (let i = 0; i < 8; i++) {
-    if (i === 4) code += '-';
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return code;
-}
-
-// Send code to Discord webhook
-async function sendCodeToDiscord(code, discordUser) {
-  const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
-  
-  const webhookData = {
-    embeds: [{
-      title: "🔑 Code de Réinitialisation Généré",
-      color: 16776960, // Yellow
-      fields: [
-        {
-          name: `\`${code}\``,
-          value: "",
-          inline: false
-        },
-      ],
-      timestamp: new Date().toISOString(),
-      footer: {
-        text: "True Vanilla - Système de Support"
-      }
-    }]
-  };
-
-  try {
-    await fetch(webhookURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(webhookData)
-    });
-  } catch (error) {
-    console.error('Erreur lors de l\'envoi du code:', error);
-  }
-}
-
-// Notify Discord when code is used
-async function notifyCodeUsed(code, discordUser) {
-  const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
-  
-  const webhookData = {
-    embeds: [{
-      title: "✅ Code de Réinitialisation Utilisé",
-      color: 5763719, // Green
-      fields: [
-        {
-          name: `\`${code}\``,
-          value: "",
-          inline: false
-        }
-      ],
-      timestamp: new Date().toISOString(),
-      footer: {
-        text: "True Vanilla - Système de Support"
-      }
-    }]
-  };
-
-  try {
-    await fetch(webhookURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(webhookData)
-    });
-  } catch (error) {
-    console.error('Erreur lors de la notification:', error);
-  }
-}
-
-// Open support panel
-supportBtn.addEventListener('click', () => {
-  supportPanel.classList.add('active');
-  supportOverlay.classList.add('active');
-  errorMessage.classList.remove('show');
-  successBadge.classList.remove('show');
-  resetCodeInput.value = '';
-  
-  // Reset to generate section
-  generateSection.style.display = 'block';
-  codeInputSection.style.display = 'none';
-  currentValidCode = null;
-});
-
-// Generate code button
-generateCodeBtn.addEventListener('click', () => {
-  // Generate new code
-  currentValidCode = generateResetCode();
-  sendCodeToDiscord(currentValidCode, discordUserData);
-  
-  // Switch to code input section
-  generateSection.style.display = 'none';
-  codeInputSection.style.display = 'block';
-});
-
-// Close support panel
-function closeSupportPanel() {
-  supportPanel.classList.remove('active');
-  supportOverlay.classList.remove('active');
-  resetCodeInput.value = '';
-  errorMessage.classList.remove('show');
-  generateSection.style.display = 'block';
-  codeInputSection.style.display = 'none';
-}
-
-supportCancelBtn.addEventListener('click', closeSupportPanel);
-supportOverlay.addEventListener('click', closeSupportPanel);
-
-// Format code input
-resetCodeInput.addEventListener('input', (e) => {
-  let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-  if (value.length > 4) {
-    value = value.slice(0, 4) + '-' + value.slice(4, 8);
-  }
-  e.target.value = value;
-});
-
-// Validate and reset
-supportSubmitBtn.addEventListener('click', () => {
-  const enteredCode = resetCodeInput.value.trim().toUpperCase();
-  
-  if (enteredCode === currentValidCode) {
-    // Code is correct
-    errorMessage.classList.remove('show');
-    successBadge.classList.add('show');
-    
-    // Reset localStorage
-    if (discordUserData) {
-      localStorage.removeItem(`submitted_${discordUserData.id}`);
+  // Generate a random reset code
+  function generateResetCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+      if (i === 4) code += '-';
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    
-    // Notify Discord that code was used
-    notifyCodeUsed(currentValidCode, discordUserData);
-    
-    // Generate new code (invalidate the old one)
-    currentValidCode = generateResetCode();
-    
-    // Re-enable form
-    document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
-      el.disabled = false;
-    });
-    
-    // Close panel after 2 seconds
-    setTimeout(() => {
-      closeSupportPanel();
-      successBadge.classList.remove('show');
-      location.reload();
-    }, 2000);
-    
-  } else {
-    // Code is incorrect
-    errorMessage.classList.add('show');
-    resetCodeInput.value = '';
+    return code;
   }
-});
 
-// Allow Enter key to submit
-resetCodeInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    supportSubmitBtn.click();
+  // Send code to Discord webhook
+  async function sendCodeToDiscord(code, discordUser) {
+    const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
+    
+    const webhookData = {
+      embeds: [{
+        title: "🔑 Code de Réinitialisation Généré",
+        color: 16776960, // Yellow
+        fields: [
+          {
+            name: `\`${code}\``,
+            value: "",
+            inline: false
+          },
+        ],
+        timestamp: new Date().toISOString(),
+        footer: {
+          text: "True Vanilla - Système de Support"
+        }
+      }]
+    };
+
+    try {
+      await fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookData)
+      });
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi du code:', error);
+    }
   }
-});
+
+  // Notify Discord when code is used
+  async function notifyCodeUsed(code, discordUser) {
+    const webhookURL = 'https://discord.com/api/webhooks/1425851102309650434/noYsiIkKywXi4xtvSSnNTQsJhgoBqfIvXYOSvZfdkSXp6wtzJ1tGo3rEvSQJeiZzjA8b';
+    
+    const webhookData = {
+      embeds: [{
+        title: "✅ Code de Réinitialisation Utilisé",
+        color: 5763719, // Green
+        fields: [
+          {
+            name: `\`${code}\``,
+            value: "",
+            inline: false
+          }
+        ],
+        timestamp: new Date().toISOString(),
+        footer: {
+          text: "True Vanilla - Système de Support"
+        }
+      }]
+    };
+
+    try {
+      await fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(webhookData)
+      });
+    } catch (error) {
+      console.error('Erreur lors de la notification:', error);
+    }
+  }
+
+  // Open support panel
+  supportBtn.addEventListener('click', () => {
+    supportPanel.classList.add('active');
+    supportOverlay.classList.add('active');
+    errorMessage.classList.remove('show');
+    successBadge.classList.remove('show');
+    resetCodeInput.value = '';
+    
+    // Reset to generate section
+    generateSection.style.display = 'block';
+    codeInputSection.style.display = 'none';
+    currentValidCode = null;
+  });
+
+  // Generate code button
+  generateCodeBtn.addEventListener('click', () => {
+    // Generate new code
+    currentValidCode = generateResetCode();
+    sendCodeToDiscord(currentValidCode, discordUserData);
+    
+    // Switch to code input section
+    generateSection.style.display = 'none';
+    codeInputSection.style.display = 'block';
+  });
+
+  // Close support panel
+  function closeSupportPanel() {
+    supportPanel.classList.remove('active');
+    supportOverlay.classList.remove('active');
+    resetCodeInput.value = '';
+    errorMessage.classList.remove('show');
+    generateSection.style.display = 'block';
+    codeInputSection.style.display = 'none';
+  }
+
+  supportCancelBtn.addEventListener('click', closeSupportPanel);
+  supportOverlay.addEventListener('click', closeSupportPanel);
+
+  // Format code input
+  resetCodeInput.addEventListener('input', (e) => {
+    let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (value.length > 4) {
+      value = value.slice(0, 4) + '-' + value.slice(4, 8);
+    }
+    e.target.value = value;
+  });
+
+  // Validate and reset
+  supportSubmitBtn.addEventListener('click', () => {
+    const enteredCode = resetCodeInput.value.trim().toUpperCase();
+    
+    if (enteredCode === currentValidCode) {
+      // Code is correct
+      errorMessage.classList.remove('show');
+      successBadge.classList.add('show');
+      
+      // Reset sessionStorage
+      if (discordUserData) {
+        sessionStorage.removeItem(`submitted_${discordUserData.id}`);
+      }
+      
+      // Notify Discord that code was used
+      notifyCodeUsed(currentValidCode, discordUserData);
+      
+      // Generate new code (invalidate the old one)
+      currentValidCode = generateResetCode();
+      
+      // Re-enable form
+      document.querySelectorAll('#applicationForm input, #applicationForm textarea, #applicationForm button').forEach(el => {
+        el.disabled = false;
+      });
+      
+      // Close panel after 2 seconds
+      setTimeout(() => {
+        closeSupportPanel();
+        successBadge.classList.remove('show');
+        location.reload();
+      }, 2000);
+      
+    } else {
+      // Code is incorrect
+      errorMessage.classList.add('show');
+      resetCodeInput.value = '';
+    }
+  });
+
+  // Allow Enter key to submit
+  resetCodeInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      supportSubmitBtn.click();
+    }
+  });
 </script>
 </body>
 </html>
